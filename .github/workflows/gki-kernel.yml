@@ -229,11 +229,6 @@ jobs:
           cp ../susfs4ksu/kernel_patches/50_add_susfs_in_gki-${{ inputs.android_version }}-${{ inputs.kernel_version }}.patch ./common/
           cp ../susfs4ksu/kernel_patches/fs/* ./common/fs/
           cp ../susfs4ksu/kernel_patches/include/linux/* ./common/include/linux/
-          
-          #lz4k
-          #cp -r ../SukiSU_patch/other/lz4k/include/linux/* ./common/include/linux
-          #cp -r ../SukiSU_patch/other/lz4k/lib/* ./common/lib
-          #cp -r ../SukiSU_patch/other/lz4k/crypto/* ./common/crypto
 
           if [ "${{ inputs.kernelsu_variant }}" == "SukiSU" ]; then
             echo "Applying SUSFS patches for SukiSU..."
@@ -462,8 +457,7 @@ jobs:
 
       - name: Patch Image File A14 & A15
         if: ${{ inputs.android_version == 'android14' || inputs.android_version == 'android15' }}
-        run: |
-          if [ "${{ inputs.kernel_version }}" != "6.6" ]; then
+        run: |          
             echo "Patching Image file..."
             cd "$CONFIG/bazel-bin/common/kernel_aarch64/"
             curl -LSs "https://raw.githubusercontent.com/ShirkNeko/SukiSU_patch/refs/heads/main/kpm/patch_linux" -o patch
@@ -472,7 +466,6 @@ jobs:
             rm -rf Image
             mv oImage Image
             cd ../../..
-          fi
             
       - name: Create Bootimgs Folder and Copy Images
         if: ${{ inputs.android_version == 'android12' || inputs.android_version == 'android13' }}
