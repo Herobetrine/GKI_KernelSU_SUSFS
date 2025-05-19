@@ -34,10 +34,7 @@ on:
       revision:
         required: false
         type: string
-        
-  workflow_dispatch:
-    inputs:
-      CPU:
+       CPU:
         description: "分支"
         required: true
         default: 'sm8750'
@@ -49,6 +46,8 @@ on:
         description: "处理器代号"
         required: true
         default: 'sun'
+        
+ 
 
 jobs:
   build-kernel-kernelsu-susfs:
